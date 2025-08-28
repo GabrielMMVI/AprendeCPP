@@ -57,6 +57,7 @@ int main(){
 	
 	comp = 2*pi*r;
 
+
 	cout << "O comprimento do círculo é: " << comp << "\n";
 	cout << "=========================================\n";
 	cout << "\n";
