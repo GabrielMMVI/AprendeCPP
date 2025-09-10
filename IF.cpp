@@ -44,6 +44,19 @@ int main (){
 		cout << "A variável num1 é menor do que num2\n\n";
 	}
 
+
+	cout << "Diga uma fruta: ";
+	getline(cin, fruta);
+	cout << "\n\n";
+	
+	
+	if (fruta == "Banana"){
+		cout << "Sua fruta é Banana\n";
+	}
+	else {
+		cout << "Sua fruta não é banana\n\n Sua fruta é: " <<
+		cout << fruta << "\n";
+	}
 	
 		
 
