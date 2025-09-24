@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <iostream>
+using namespace std;
  
 int main() {
  
@@ -11,6 +12,5 @@ int main() {
     
     cout << X << endl;
     
- 
     return 0;
 }
