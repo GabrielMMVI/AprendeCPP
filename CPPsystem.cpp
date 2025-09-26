@@ -5,7 +5,7 @@ using namespace std;
 int main(){
 	setlocale(LC_ALL, "portuguese");
 
-	cout << "É possível usar recursos do sistema através do comando: \n";
+	cout << "ï¿½ possï¿½vel usar recursos do sistema atravÃ©s do comando: \n";
 	cout << "system(comando)\n";
 	
 	cout << "Basta usar o comando com o mesmo script que se usa no prompt de comando\n\n";
