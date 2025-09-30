@@ -15,6 +15,6 @@ int main () {
 	sal = hr * vlhr;
 	
 	cout << "NUMBER = " << n << endl;
-	cout << "SALARY = " << fixed << setprecision(2) << sal << endl;
+	cout << "SALARY = U$" << fixed << setprecision(2) << sal << endl;
 	
 }
