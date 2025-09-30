@@ -19,7 +19,7 @@ loop:
 	cin >> faz;
 	
 
-	if (faz = 1){
+	if (faz == 1){
 	
 	
 	cout << "Informe a letra da tarefa EM MAÍUSCULO: ";
@@ -95,7 +95,7 @@ loop:
 	
 	
 	
-} else if (faz = 0){
+} else if (faz == 0){
 	system("pause");
 	return 0;
 }
