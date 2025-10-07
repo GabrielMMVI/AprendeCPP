@@ -56,9 +56,9 @@ loop:
 	cout << "Gerando email...\n\n\n";
 	
 	cout << "Data: " << dia << "/" << mes << "/2025\n";
-	cout << "Responsável: " << responsavel << endl;
 	cout << "Versão BD: " << versao << endl;
-	cout << "BPLs: " << bpls;
+	cout << "Responsável: " << responsavel << endl;
+	cout << "BPLs: " << bpls << endl;
 	cout << "Motivo: Atualização anual padrão\n";
 	cout << "Responsável: " << responsavel << endl;
 	cout << endl << endl;
