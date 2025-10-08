@@ -44,6 +44,7 @@ loop:
 	
 	cout << "Informe o cliente: ";
 	getline(cin, cliente);
+	getline(cin, cliente);
 	
 	cout << "Informe o dia e o mês\n";
 	cout << "Informe da seguinte maneira = 01/01\n\n";
@@ -56,6 +57,7 @@ loop:
 	cout << "Gerando email...\n\n\n";
 	
 	cout << "Data: " << dia << "/" << mes << "/2025\n";
+	cout << "Cliente: " << cliente << "\n";
 	cout << "Versão BD: " << versao << endl;
 	cout << "Responsável: " << responsavel << endl;
 	cout << "BPLs: " << bpls << endl;
