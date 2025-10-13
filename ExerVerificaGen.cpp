@@ -31,6 +31,9 @@ int main (){
 		cout << "Gênero não definido.\n";
 	}
 	
+	system("break");
+	return 0;
+	
 	
 	
 }
