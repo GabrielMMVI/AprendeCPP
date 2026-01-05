@@ -1,4 +1,5 @@
 #include<iostream>
+#include<locale.h>
 #include<iomanip>
 #include<math.h>
 #include<algorithm>
@@ -33,6 +34,7 @@ double i; //Juros convertidos em porcentagem
 //Equação PMT
 double numerador;
 double denominador;
+double potencia;
 
 
 
@@ -50,11 +52,12 @@ void calculaEmprestimo(double valorEmprestimo, double juros, int parcelas){
 	
 	ioft = ioffixo + iofdiario; // Cálculo total do IoF
 	
-	PV = valorEmprestimo * ioft;
+	PV = valorEmprestimo + ioft;
 	
 	//Equação PMT
-	numerador = i*pow((1+i),parcelas);
-	denominador = pow((1+i),parcelas)-1;
+	potencia = pow(1+i,parcelas);
+	numerador = i*potencia;
+	denominador = i*potencia -1;
 	
 	PMT = PV * (numerador / denominador);
 	
@@ -65,13 +68,24 @@ void calculaEmprestimo(double valorEmprestimo, double juros, int parcelas){
 		
 		cout << fixed << setprecision(2);
 		cout << "Quantidade de parcelas solicitadas: " << parcelas << endl;
-		cout << "Valor das parcelas: R$" << PMT;
+		cout << "Valor das parcelas: R$" << PMT << "\n\n\n";
 	}
 	
 	
 }
 
 int main(){
+	setlocale(LC_ALL, "Portuguese");
+	
+	char faz;
+	
+	cout << "Deseja realizar operação de empréstimo(Y/N)? ";
+	cin >> faz;
+	
+loopFaz:
+	
+	if(faz == 'y' || faz == 'Y'){
+	
 	cout << "!!Calculadora de juros!!\n\n-------------------------------------------------------------------------------\n";
 	
 	cout << "Qual o valor do empréstimo que você deseja fazer?\nR$";
@@ -84,8 +98,34 @@ int main(){
 	cout << "\n\n" << "Calculando valor do seu empréstimo...\n";
 	cout << "Valor calculado!\n";
 	calculaEmprestimo(valorEmprestimo, juros, parcelas);
+	}
 	
-	system("pause");
-	return 0;
+	else if(faz == 'n' || faz == 'N') {
+		cout << "Fechando operação...\n";
+		
+		system("Pause");
+		return 0;}
+	
+	else{
+		cout << "Operação inválida!\nFechando Algoritmo...\n";
+		
+		system("Pause");
+		return 0;
+	}
+	
+	cout << "Deseja simular um empréstimo novamente(Y/N)? ";
+	cin >> faz;
+	
+	if(faz == 'y'|| faz == 'Y')  {goto loopFaz;}
+	 
+	else if(faz == 'n' || faz == 'N') {
+	cout << "Fechando operação...\n";
+	
+	system("Pause");
+	return 0;}
+	
+	else{
+		cout << "Operação inválida!\nFechando Algoritmo...\n";
+	}
 	
 }
