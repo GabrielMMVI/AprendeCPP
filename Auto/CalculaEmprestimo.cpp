@@ -6,33 +6,33 @@
 
 using namespace std;
 
-// Constantes fíxas
-const double ioff = 0.0038;	//IoF fixo
-const double iofd = 0.000082; //IoF diário
+// Constantes fï¿½xas
+const double ioff = 0.38;	//IoF fixo
+const double iofd = 0.0082; //IoF diï¿½rio
 
 
-//Variáveis Globais
+//Variï¿½veis Globais
 
 //Referente ao IoF
 double ioft; //IoF total
 double ioffixo; // Valor calculado do IoF fixo
-double iofdiario; //Valor calculado do IoF diário
+double iofdiario; //Valor calculado do IoF diario
 
-//Dias/parcelas
+
 int parcelas; //Quantidade de parcelas
-int dias;
+int dias;//Dias/parcelas
 
 //Valor do Emprestimo
-double valorEmprestimo; //Valor do empréstimo
-double PV; //Valor do empréstimo com taxas IoF aplcadas
+double valorEmprestimo; //Valor do emprï¿½stimo
+double PV; //Valor do emprï¿½stimo com taxas IoF aplcadas
 double PMT; // Valor total das parcelas
 
 //Taxas
 double juros; //Porcentagem dos juros
 double i; //Juros convertidos em porcentagem
 
-//Equação PMT
-double numerador;
+//Equacao PMT
+double numerador; 
 double denominador;
 double potencia;
 
@@ -46,15 +46,15 @@ void calculaEmprestimo(double valorEmprestimo, double juros, int parcelas){
 	
 	//Calculo dos valores	
 	i = juros / 100; //Converte o juros em porcentagem
-	ioffixo = valorEmprestimo * ioff; // Calcula valor do IoF Fixo do empréstimo
-	dias = parcelas*30; //Transforma a quantidade de parcelas em dias (Aproximação de 30 dias)
-	iofdiario = valorEmprestimo * iofd * min(dias,365); // Calcula valor do IoF diário do empréstimo
+	ioffixo = valorEmprestimo * (ioff * 0.01); // Calcula valor do IoF Fixo do emprestimo
+	dias = parcelas*30; //Transforma a quantidade de parcelas em dias (Aproximacao de 30 dias)
+	iofdiario = valorEmprestimo * (iofd*0.01) * min(dias,365); // Calcula valor do IoF diario do emprestimo
 	
-	ioft = ioffixo + iofdiario; // Cálculo total do IoF
+	ioft = ioffixo + iofdiario; // Calculo total do IoF
 	
 	PV = valorEmprestimo + ioft;
 	
-	//Equação PMT
+	//Equaï¿½ï¿½o PMT
 	potencia = pow(1+i,parcelas);
 	numerador = i*potencia;
 	denominador = i*potencia -1;
@@ -79,7 +79,7 @@ int main(){
 	
 	char faz;
 	
-	cout << "Deseja realizar operação de empréstimo(Y/N)? ";
+	cout << "Deseja realizar operaï¿½ï¿½o de emprï¿½stimo(Y/N)? ";
 	cin >> faz;
 	
 loopFaz:
@@ -88,44 +88,44 @@ loopFaz:
 	
 	cout << "!!Calculadora de juros!!\n\n-------------------------------------------------------------------------------\n";
 	
-	cout << "Qual o valor do empréstimo que você deseja fazer?\nR$";
+	cout << "Qual o valor do emprï¿½stimo que vocï¿½ deseja fazer?\nR$";
 	cin >> valorEmprestimo;
 	cout << "Qual a margem de juros?\n%:";
 	cin >> juros;
-	cout << "Em quantas parcelas será dividido?\nParcelas: ";
+	cout << "Em quantas parcelas serï¿½ dividido?\nParcelas: ";
 	cin >> parcelas;
 	
-	cout << "\n\n" << "Calculando valor do seu empréstimo...\n";
+	cout << "\n\n" << "Calculando valor do seu emprï¿½stimo...\n";
 	cout << "Valor calculado!\n";
 	calculaEmprestimo(valorEmprestimo, juros, parcelas);
 	}
 	
 	else if(faz == 'n' || faz == 'N') {
-		cout << "Fechando operação...\n";
+		cout << "Fechando operaï¿½ï¿½o...\n";
 		
 		system("Pause");
 		return 0;}
 	
 	else{
-		cout << "Operação inválida!\nFechando Algoritmo...\n";
+		cout << "Operaï¿½ï¿½o invï¿½lida!\nFechando Algoritmo...\n";
 		
 		system("Pause");
 		return 0;
 	}
 	
-	cout << "Deseja simular um empréstimo novamente(Y/N)? ";
+	cout << "Deseja simular um emprï¿½stimo novamente(Y/N)? ";
 	cin >> faz;
 	
 	if(faz == 'y'|| faz == 'Y')  {goto loopFaz;}
 	 
 	else if(faz == 'n' || faz == 'N') {
-	cout << "Fechando operação...\n";
+	cout << "Fechando operaï¿½ï¿½o...\n";
 	
 	system("Pause");
 	return 0;}
 	
 	else{
-		cout << "Operação inválida!\nFechando Algoritmo...\n";
+		cout << "Operaï¿½ï¿½o invï¿½lida!\nFechando Algoritmo...\n";
 	}
 	
 }
