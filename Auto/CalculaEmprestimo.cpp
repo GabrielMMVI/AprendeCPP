@@ -6,69 +6,83 @@
 
 using namespace std;
 
-// Constantes fï¿½xas
-const double ioff = 0.38;	//IoF fixo
-const double iofd = 0.0082; //IoF diï¿½rio
 
 
-//Variï¿½veis Globais
-
-//Referente ao IoF
-double ioft; //IoF total
-double ioffixo; // Valor calculado do IoF fixo
-double iofdiario; //Valor calculado do IoF diario
 
 
-int parcelas; //Quantidade de parcelas
-int dias;//Dias/parcelas
-
-//Valor do Emprestimo
-double valorEmprestimo; //Valor do emprï¿½stimo
-double PV; //Valor do emprï¿½stimo com taxas IoF aplcadas
-double PMT; // Valor total das parcelas
-
-//Taxas
-double juros; //Porcentagem dos juros
-double i; //Juros convertidos em porcentagem
-
-//Equacao PMT
-double numerador; 
-double denominador;
-double potencia;
 
 
 
 
 
 void calculaEmprestimo(double valorEmprestimo, double juros, int parcelas){
+	//constantes fixas privadas
+	const double ioff = 0.0038;	//IoF fixo
+	const double iofd = 0.000082; //IoF diário
 
+	//Variáveis privadas
 	
+	//Referente ao IoF
+	double ioft; //IoF total
+	double ioffixo; // Valor calculado do IoF fixo
+	double iofdiario; //Valor calculado do IoF diario
+	
+	//Referente ao cálculo de parcelas
+	int dias;//Dias/parcelas
+	
+	//Valores usados na equação PMT
+	double PV; //Valor do empréstimo com taxas IoF aplcadas
+	double PMT; // Valor total das parcelas
+	//Taxas
+	double i; //Juros convertidos em porcentagem
+
+	//Equacao PMT
+	double numerador; 
+	double denominador;
+	double potencia;
+
+
 	
 	//Calculo dos valores	
 	i = juros / 100; //Converte o juros em porcentagem
-	ioffixo = valorEmprestimo * (ioff * 0.01); // Calcula valor do IoF Fixo do emprestimo
+	ioffixo = valorEmprestimo * ioff; // Calcula valor do IoF Fixo do emprestimo
 	dias = parcelas*30; //Transforma a quantidade de parcelas em dias (Aproximacao de 30 dias)
-	iofdiario = valorEmprestimo * (iofd*0.01) * min(dias,365); // Calcula valor do IoF diario do emprestimo
+	iofdiario = valorEmprestimo * iofd * min(dias,365); // Calcula valor do IoF diario do emprestimo
 	
 	ioft = ioffixo + iofdiario; // Calculo total do IoF
 	
 	PV = valorEmprestimo + ioft;
 	
-	//Equaï¿½ï¿½o PMT
+	//Equacao PMT
 	potencia = pow(1+i,parcelas);
 	numerador = i*potencia;
-	denominador = i*potencia -1;
+	denominador = potencia -1;
 	
 	PMT = PV * (numerador / denominador);
 	
 	if(parcelas == 1){
 		cout << fixed << setprecision(2);
-		cout << "Valor da parcela: R$"<< PMT << endl;
+		cout << "|__________________________________________________________|\n";
+		cout << "|                    ::Parcela única::                     |\n";
+		cout << "|__________________________________________________________|\n";
+		cout << "| -> Valor financiado: " << valorEmprestimo << "\n";
+		cout << "| -> Valor a pagar: R$"<< PV << "\n";
+		cout << "| -> Valor calculado do IoF: R$" << ioft << "\n"; 
+		cout << "| -> Valor calculado dos juros: R$" << i*valorEmprestimo <<endl;
+		cout << "|__________________________________________________________|\n\n\n\n";
 	}else{
 		
 		cout << fixed << setprecision(2);
-		cout << "Quantidade de parcelas solicitadas: " << parcelas << endl;
-		cout << "Valor das parcelas: R$" << PMT << "\n\n\n";
+		cout << "|__________________________________________________________|\n";
+		cout << "|                  ::Múltiplas parcelas::                  |\n";
+		cout << "|__________________________________________________________|\n";
+		cout << "| -> Valor financiado: R$" << valorEmprestimo << endl;
+		cout << "| -> Quantidade de parcelas solicitadas: " << parcelas << endl;
+		cout << "| -> Valor individual das parcelas: R$" << PMT << endl;
+		cout << "| -> Valor total a Pagar: R$" << PV << endl;
+		cout << "| -> Valor calculado do IoF: R$" << ioft << endl;
+		cout << "| -> Valor calculado dos juros: R$" << i*valorEmprestimo <<endl;
+		cout << "|__________________________________________________________|\n\n\n\n";
 	}
 	
 	
@@ -76,56 +90,71 @@ void calculaEmprestimo(double valorEmprestimo, double juros, int parcelas){
 
 int main(){
 	setlocale(LC_ALL, "Portuguese");
-	
+
+
 	char faz;
 	
-	cout << "Deseja realizar operaï¿½ï¿½o de emprï¿½stimo(Y/N)? ";
-	cin >> faz;
+	cout << "|__________________________________________________________|\n";
+	cout << "|       - + - + - + - Simulador de Juros - + - + - + -     |\n";
+	cout << "|__________________________________________________________|\n";
 	
-loopFaz:
+	cout << "|Algorimo de cálculo premeditado de impostos e empréstimos.|\n";
+	cout << "|Informe o valor desejado, juros (sem a porcentagem) e     |\n";
+	cout << "|a quantidade de parcelas desejadas para o algoritmo       |\n";
+	cout << "|realizar a equação de juros.                              |\n";
 	
-	if(faz == 'y' || faz == 'Y'){
+	cout << "|__________________________________________________________|\n";
+	cout << "|            Deseja iniciar a simulação? (Y/n)             |\n";
+	cout << "|__________________________________________________________|\n";
+	cout << ":";
+	cin >> faz;	
 	
-	cout << "!!Calculadora de juros!!\n\n-------------------------------------------------------------------------------\n";
 	
-	cout << "Qual o valor do emprï¿½stimo que vocï¿½ deseja fazer?\nR$";
+	do{
+		
+		if(faz != 'y' && faz != 'Y'){
+			system("pause");
+			return 0;			
+		}else {
+		
+		
+	int parcelas; //Quantidade de parcelas
+	double valorEmprestimo; //Valor do empréstimo
+	double juros; //Porcentagem dos juros
+		
+	
+	
+	cout << "\n\n\n";
+	
+
+	
+	cout << "Qual o valor do empréstimo que você deseja fazer?\nR$";
 	cin >> valorEmprestimo;
 	cout << "Qual a margem de juros?\n%:";
 	cin >> juros;
-	cout << "Em quantas parcelas serï¿½ dividido?\nParcelas: ";
+	cout << "Em quantas parcelas será dividido?\nParcelas: ";
 	cin >> parcelas;
+	cout << endl;
 	
-	cout << "\n\n" << "Calculando valor do seu emprï¿½stimo...\n";
-	cout << "Valor calculado!\n";
+	cout << "|__________________________________________________________|\n";
+	cout << "|                                                          |\n";	
+	cout << "|                     Equação realizada!                   |\n";
+	cout << "|                                                          |\n";	
+
 	calculaEmprestimo(valorEmprestimo, juros, parcelas);
-	}
 	
-	else if(faz == 'n' || faz == 'N') {
-		cout << "Fechando operaï¿½ï¿½o...\n";
-		
-		system("Pause");
-		return 0;}
 	
-	else{
-		cout << "Operaï¿½ï¿½o invï¿½lida!\nFechando Algoritmo...\n";
-		
-		system("Pause");
-		return 0;
-	}
-	
-	cout << "Deseja simular um emprï¿½stimo novamente(Y/N)? ";
+	cout << "|__________________________________________________________|\n";
+	cout << "|             Deseja realizar outra simulação?             |\n";
+	cout << "|__________________________________________________________|\n";
+	cout << ":";
 	cin >> faz;
 	
-	if(faz == 'y'|| faz == 'Y')  {goto loopFaz;}
-	 
-	else if(faz == 'n' || faz == 'N') {
-	cout << "Fechando operaï¿½ï¿½o...\n";
-	
-	system("Pause");
-	return 0;}
-	
-	else{
-		cout << "Operaï¿½ï¿½o invï¿½lida!\nFechando Algoritmo...\n";
 	}
 	
+  } while (faz == 'y' || faz == 'Y');
+			
+		cout << "Encerrando algoritmo!\n\n\n";
+		system("Pause");
+		return 0;
 }
