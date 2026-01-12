@@ -7,14 +7,6 @@
 using namespace std;
 
 
-
-
-
-
-
-
-
-
 void calculaEmprestimo(double valorEmprestimo, double juros, int parcelas){
 	//constantes fixas privadas
 	const double ioff = 0.0038;	//IoF fixo
@@ -35,11 +27,13 @@ void calculaEmprestimo(double valorEmprestimo, double juros, int parcelas){
 	double PMT; // Valor total das parcelas
 	//Taxas
 	double i; //Juros convertidos em porcentagem
+	double CET; //Custo Efetivo Total
 
 	//Equacao PMT
 	double numerador; 
 	double denominador;
 	double potencia;
+	double totalPagar;
 
 
 	
@@ -60,28 +54,39 @@ void calculaEmprestimo(double valorEmprestimo, double juros, int parcelas){
 	
 	PMT = PV * (numerador / denominador);
 	
+	totalPagar = PMT*parcelas;
+	
+	//Custo efetivo Total
+	CET = (totalPagar/valorEmprestimo -1) * 100;
+	
+	
+	
 	if(parcelas == 1){
 		cout << fixed << setprecision(2);
 		cout << "|__________________________________________________________|\n";
-		cout << "|                    ::Parcela única::                     |\n";
+		cout << "|                    :: Parcela única ::                   |\n";
 		cout << "|__________________________________________________________|\n";
 		cout << "| -> Valor financiado: " << valorEmprestimo << "\n";
-		cout << "| -> Valor a pagar: R$"<< PV << "\n";
+		cout << "| -> Valor a pagar: R$"<< PMT << "\n";
 		cout << "| -> Valor calculado do IoF: R$" << ioft << "\n"; 
-		cout << "| -> Valor calculado dos juros: R$" << i*valorEmprestimo <<endl;
+		cout << "| -> Valor calculado dos juros: R$" << totalPagar - PV <<endl;
+		cout << "| -> Valor presente (Empréstimo + IOF): R$" << PV << endl;
+		cout << "| -> Custo total efetivo: " << CET << "%\n" << endl;
 		cout << "|__________________________________________________________|\n\n\n\n";
 	}else{
 		
 		cout << fixed << setprecision(2);
 		cout << "|__________________________________________________________|\n";
-		cout << "|                  ::Múltiplas parcelas::                  |\n";
+		cout << "|                  :: Múltiplas parcelas::                 |\n";
 		cout << "|__________________________________________________________|\n";
 		cout << "| -> Valor financiado: R$" << valorEmprestimo << endl;
 		cout << "| -> Quantidade de parcelas solicitadas: " << parcelas << endl;
 		cout << "| -> Valor individual das parcelas: R$" << PMT << endl;
-		cout << "| -> Valor total a Pagar: R$" << PV << endl;
+		cout << "| -> Valor total a Pagar: R$" << totalPagar << endl;
 		cout << "| -> Valor calculado do IoF: R$" << ioft << endl;
-		cout << "| -> Valor calculado dos juros: R$" << i*valorEmprestimo <<endl;
+		cout << "| -> Valor calculado dos juros: R$" << totalPagar - PV <<endl;
+		cout << "| -> Valor presente (Empréstimo + IOF): R$" << PV << endl;
+		cout << "| -> Custo total efetivo: " << CET << "%\n";
 		cout << "|__________________________________________________________|\n\n\n\n";
 	}
 	
@@ -130,10 +135,28 @@ int main(){
 	
 	cout << "Qual o valor do empréstimo que você deseja fazer?\nR$";
 	cin >> valorEmprestimo;
+	while(!(cin >> valorEmprestimo))do{
+		cout << "Entrada de valor inválida!\n";
+		cout << "Insira um valor correto: R$";
+		cin >> valorEmprestimo;
+		
+		
+	}
+		
+	
 	cout << "Qual a margem de juros?\n%:";
 	cin >> juros;
+	if(!(cin >> juros)){
+		cout << "Entrada de juros inválida!\nEncerrando aplicação!\n";
+		system("pause");
+		return 0;
+	}
 	cout << "Em quantas parcelas será dividido?\nParcelas: ";
 	cin >> parcelas;
+	if(!(cin >> parcelas)){
+		cout << "Entrada de parcelas inválida!\nEncerrando aplicação\n";
+		return 0;
+	}
 	cout << endl;
 	
 	cout << "|__________________________________________________________|\n";
@@ -142,6 +165,7 @@ int main(){
 	cout << "|                                                          |\n";	
 
 	calculaEmprestimo(valorEmprestimo, juros, parcelas);
+	
 	
 	
 	cout << "|__________________________________________________________|\n";
